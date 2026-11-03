@@ -19,7 +19,7 @@ export class AppController {
             <h1>QRMatrix</h1>
             <p>Web-сервис генерации и управления QR-кодами и штрих-кодами</p>
             <p><span class="version">Версия 0.0.1</span></p>
-            <p class="status">Разработка в процессе</p>
+            <p class="status">Разработка системы в процессе</p>
           </div>
         </body>
       </html>
