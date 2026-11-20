@@ -1,9 +1,15 @@
 # QRMatrix
 
-Web-сервис генерации и управления QR-кодами и штрих-кодами.
+Веб-приложение для создания, просмотра и управления QR-кодами (версия `0.0.3`).
 
 ## Запуск
 
-```bash
-docker pull grffarch/qrmatrix:0.0.2
-docker run --rm -p 8080:8080 grffarch/qrmatrix:0.0.2
+Репозиторий: https://github.com/grff-arch/QRMatrix
+Ветка: lab3
+Pull Request: https://github.com/grff-arch/QRMatrix/pull/3
+Образ: grffarch/qrmatrix:0.0.3
+Страница образа: https://hub.docker.com/r/grffarch/qrmatrix
+
+git clone -b lab3 https://github.com/grff-arch/QRMatrix
+cd QRMatrix
+docker compose up -d

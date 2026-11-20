@@ -8,15 +8,15 @@ export class CodesController {
 
   @Get()
   @Render('index')
-  getHome() {
-    const count = this.codesService.readAll().length;
-    return { count };
+  async getHome() {
+    const items = await this.codesService.readAll();
+    return { count: items.length, version: '0.0.3' };
   }
 
   @Get('codes')
   @Render('list')
-  getList() {
-    const items = this.codesService.readAll();
+  async getList() {
+    const items = await this.codesService.readAll();
     return { items };
   }
 
@@ -39,14 +39,18 @@ export class CodesController {
     if (!cleanTitle || !cleanContent) {
       return res.redirect(
         '/access-denied?reason=' +
-          encodeURIComponent('Попытка создать QR-код с пустым названием или пустым содержимым. Система отклонила запрос: оба поля обязательны.'),
+          encodeURIComponent(
+            'Попытка создать QR-код с пустым названием или пустым содержимым. Система отклонила запрос: оба поля обязательны.',
+          ),
       );
     }
 
     if (cleanContent.length > 300) {
       return res.redirect(
         '/access-denied?reason=' +
-          encodeURIComponent('Превышена допустимая длина кодируемого текста (более 300 символов). Система отклонила генерацию.'),
+          encodeURIComponent(
+            'Превышена допустимая длина кодируемого текста (более 300 символов). Система отклонила генерацию.',
+          ),
       );
     }
 
@@ -55,20 +59,24 @@ export class CodesController {
   }
 
   @Get('codes/:id')
-  getOne(@Param('id') id: string, @Res() res: express.Response) {
-    const item = this.codesService.findById(id);
+  async getOne(@Param('id') id: string, @Res() res: express.Response) {
+    const item = await this.codesService.findById(id);
 
     if (!item) {
       return res.redirect(
         '/access-denied?reason=' +
-          encodeURIComponent(`Запрошена карточка QR-кода с ID «${id}», но такая запись отсутствует в базе данных.`),
+          encodeURIComponent(
+            `Запрошена карточка QR-кода с ID «${id}», но такая запись отсутствует в базе данных.`,
+          ),
       );
     }
 
     if (item.isPrivate) {
       return res.redirect(
         '/access-denied?reason=' +
-          encodeURIComponent(`Попытка открыть закрытый системный QR-код (ID ${item.id}). У роли «Пользователь» недостаточно прав для просмотра.`),
+          encodeURIComponent(
+            `Попытка открыть закрытый системный QR-код (ID ${item.id}). У роли «Пользователь» недостаточно прав для просмотра.`,
+          ),
       );
     }
 
