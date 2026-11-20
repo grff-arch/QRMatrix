@@ -2,34 +2,58 @@
 <html lang="ru">
 <head>
   <meta charset="UTF-8" />
-  <title>QRMatrix — Карточка #{{item.id}}</title>
-  <style>
-    body { font-family: system-ui, sans-serif; max-width: 860px; margin: 32px auto; padding: 0 16px; color: #1f2937; }
-    nav { display: flex; gap: 16px; padding: 12px 16px; background: #f3f4f6; border-radius: 8px; margin-bottom: 24px; }
-    nav a { text-decoration: none; color: #1d4ed8; font-weight: 600; }
-    .card { border: 1px solid #e5e7eb; border-radius: 10px; padding: 24px; display: flex; gap: 24px; align-items: center; }
-    .btn { display: inline-block; margin-top: 12px; padding: 8px 14px; background: #059669; color: #fff; text-decoration: none; border-radius: 6px; }
-  </style>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>QRMatrix — Карточка #{{item.id}} (v0.0.4)</title>
+  <link rel="stylesheet" href="/vendor/bootstrap/css/bootstrap.min.css" />
 </head>
-<body>
-  <nav>
-    <strong>QRMatrix</strong>
-    <a href="/">Главная</a>
-    <a href="/codes">Список кодов</a>
-    <a href="/codes/new">Создать QR-код</a>
-    <a href="/access-denied">Проверка отказа</a>
+<body class="bg-light text-dark">
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark mb-4">
+    <div class="container">
+      <a class="navbar-brand fw-bold" href="/">QRMatrix <span class="badge text-bg-primary ms-1">v0.0.4</span></a>
+      <div class="navbar-nav gap-2">
+        <a class="nav-link" href="/">Главная</a>
+        <a class="nav-link active" href="/codes">Список кодов</a>
+        <a class="nav-link" href="/codes/new">Создать QR-код</a>
+        <a class="nav-link" href="/access-denied">Проверка отказа</a>
+      </div>
+    </div>
   </nav>
 
-  <h1>QRMatrix — Карточка записи #{{item.id}}</h1>
-  <div class="card">
-    <img src="{{item.dataUrl}}" alt="QR Code" width="220" height="220" />
-    <div>
-      <h2>{{item.title}}</h2>
-      <p><strong>Закодировано:</strong> <code>{{item.content}}</code></p>
-      <p><strong>Цвет:</strong> {{item.color}}</p>
-      <p><strong>Дата создания:</strong> {{item.createdAt}}</p>
-      <a class="btn" href="{{item.dataUrl}}" download="qrmatrix-{{item.id}}.png">Скачать PNG</a>
+  <main class="container pb-5">
+    <div class="mb-3">
+      <a href="/codes" class="btn btn-sm btn-outline-secondary">← Назад к списку</a>
     </div>
-  </div>
+
+    <div class="card shadow-sm">
+      <div class="card-body p-4">
+        <div class="row g-4 align-items-center">
+          <div class="col-md-4 text-center">
+            <img src="{{item.dataUrl}}" alt="QR Code" class="img-fluid border rounded p-2 bg-white" style="max-width: 240px;" />
+          </div>
+          <div class="col-md-8">
+            <span class="badge text-bg-light border text-dark mb-2">Запись #{{item.id}}</span>
+            <h1 class="h3 mb-3">{{item.title}}</h1>
+            <dl class="row mb-3">
+              <dt class="col-sm-4 text-muted">Содержимое</dt>
+              <dd class="col-sm-8"><code>{{item.content}}</code></dd>
+
+              <dt class="col-sm-4 text-muted">Цвет</dt>
+              <dd class="col-sm-8">{{item.color}}</dd>
+
+              <dt class="col-sm-4 text-muted">Создан</dt>
+              <dd class="col-sm-8">{{item.createdAt}}</dd>
+            </dl>
+            <div class="d-flex flex-wrap gap-2">
+              <a class="btn btn-success" href="{{item.dataUrl}}" download="qrmatrix-{{item.id}}.png">Скачать PNG</a>
+              <a class="btn btn-outline-primary" href="/codes/new">Создать ещё</a>
+              <a class="btn btn-outline-secondary" href="/">На главную</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <script src="/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
