@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <title>QRMatrix — Главная</title>
+  <style>
+    body { font-family: system-ui, sans-serif; max-width: 860px; margin: 32px auto; padding: 0 16px; color: #1f2937; }
+    nav { display: flex; gap: 16px; padding: 12px 16px; background: #f3f4f6; border-radius: 8px; margin-bottom: 24px; }
+    nav a { text-decoration: none; color: #1d4ed8; font-weight: 600; }
+    .card { border: 1px solid #e5e7eb; border-radius: 10px; padding: 20px; margin-top: 16px; }
+    .btn { display: inline-block; padding: 10px 16px; background: #1d4ed8; color: #fff; text-decoration: none; border-radius: 6px; margin-right: 8px; }
+  </style>
+</head>
+<body>
+  <nav>
+    <strong>QRMatrix</strong>
+    <a href="/">Главная</a>
+    <a href="/codes">Список кодов</a>
+    <a href="/codes/new">Создать QR-код</a>
+    <a href="/access-denied">Проверка отказа</a>
+  </nav>
+
+  <h1>QRMatrix — Web-сервис генерации и управления QR-кодами</h1>
+  <p>Лабораторная работа №2. Текущее количество записей в хранилище (<code>data/codes.json</code>): <strong>{{count}}</strong>.</p>
+
+  <div class="card">
+    <h3>Основные функции системы:</h3>
+    <ul>
+      <li><strong>Изменение данных:</strong> генерация нового QR-кода с выбором цвета и сохранением в JSON.</li>
+      <li><strong>Просмотр данных:</strong> просмотр реестра кодов и детальной карточки с картинкой.</li>
+      <li><strong>Ошибочный сценарий:</strong> блокировка пустых данных и закрытых записей с пояснением причины.</li>
+    </ul>
+    <p>
+      <a class="btn" href="/codes/new">Создать QR-код</a>
+      <a class="btn" href="/codes" style="background:#374151;">Открыть список</a>
+    </p>
+  </div>
+</body>
+</html>

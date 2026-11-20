@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <title>QRMatrix — Создать QR-код</title>
+  <style>
+    body { font-family: system-ui, sans-serif; max-width: 860px; margin: 32px auto; padding: 0 16px; color: #1f2937; }
+    nav { display: flex; gap: 16px; padding: 12px 16px; background: #f3f4f6; border-radius: 8px; margin-bottom: 24px; }
+    nav a { text-decoration: none; color: #1d4ed8; font-weight: 600; }
+    .field { margin-bottom: 14px; }
+    label { display: block; font-weight: 600; margin-bottom: 4px; }
+    input[type="text"] { width: 100%; max-width: 480px; padding: 8px; border: 1px solid #d1d5db; border-radius: 6px; }
+    button { padding: 10px 18px; background: #1d4ed8; color: #fff; border: none; border-radius: 6px; cursor: pointer; font-weight: 600; }
+  </style>
+</head>
+<body>
+  <nav>
+    <strong>QRMatrix</strong>
+    <a href="/">Главная</a>
+    <a href="/codes">Список кодов</a>
+    <a href="/codes/new">Создать QR-код</a>
+    <a href="/access-denied">Проверка отказа</a>
+  </nav>
+
+  <h1>QRMatrix — Генерация нового QR-кода</h1>
+  <p>Чтобы проверить ошибочный сценарий, отправьте форму с пустыми полями.</p>
+
+  <form method="POST" action="/codes">
+    <div class="field">
+      <label for="title">Название QR-кода</label>
+      <input id="title" name="title" type="text" placeholder="Например: Ссылка на презентацию" />
+    </div>
+    <div class="field">
+      <label for="content">Текст или URL для кодирования</label>
+      <input id="content" name="content" type="text" placeholder="https://example.com" />
+    </div>
+    <div class="field">
+      <label for="color">Цвет модулей QR-кода</label>
+      <input id="color" name="color" type="color" value="#111827" />
+    </div>
+    <button type="submit">Сгенерировать и сохранить</button>
+  </form>
+</body>
+</html>

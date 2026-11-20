@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <title>QRMatrix — Отказ в операции</title>
+  <style>
+    body { font-family: system-ui, sans-serif; max-width: 860px; margin: 32px auto; padding: 0 16px; color: #1f2937; }
+    nav { display: flex; gap: 16px; padding: 12px 16px; background: #f3f4f6; border-radius: 8px; margin-bottom: 24px; }
+    nav a { text-decoration: none; color: #1d4ed8; font-weight: 600; }
+    .alert { border: 1px solid #fca5a5; background: #fef2f2; color: #991b1b; border-radius: 10px; padding: 20px; }
+  </style>
+</head>
+<body>
+  <nav>
+    <strong>QRMatrix</strong>
+    <a href="/">Главная</a>
+    <a href="/codes">Список кодов</a>
+    <a href="/codes/new">Создать QR-код</a>
+    <a href="/access-denied">Проверка отказа</a>
+  </nav>
+
+  <h1>QRMatrix — Операция отклонена</h1>
+  <div class="alert">
+    <p><strong>Роль инициатора:</strong> Пользователь</p>
+    <p><strong>Причина отказа:</strong> {{reason}}</p>
+  </div>
+  <p style="margin-top: 16px;">
+    <a href="/codes/new">Вернуться к форме создания</a> | <a href="/codes">Перейти к списку кодов</a>
+  </p>
+</body>
+</html>
