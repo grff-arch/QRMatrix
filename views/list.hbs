@@ -2,51 +2,84 @@
 <html lang="ru">
 <head>
   <meta charset="UTF-8" />
-  <title>QRMatrix — Список кодов</title>
-  <style>
-    body { font-family: system-ui, sans-serif; max-width: 860px; margin: 32px auto; padding: 0 16px; color: #1f2937; }
-    nav { display: flex; gap: 16px; padding: 12px 16px; background: #f3f4f6; border-radius: 8px; margin-bottom: 24px; }
-    nav a { text-decoration: none; color: #1d4ed8; font-weight: 600; }
-    table { width: 100%; border-collapse: collapse; margin-top: 16px; }
-    th, td { border: 1px solid #e5e7eb; padding: 10px; text-align: left; }
-    th { background: #f9fafb; }
-    .badge-private { background: #fee2e2; color: #991b1b; padding: 2px 8px; border-radius: 4px; font-size: 12px; }
-  </style>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>QRMatrix — Список кодов (v0.0.4)</title>
+  <link rel="stylesheet" href="/vendor/bootstrap/css/bootstrap.min.css" />
 </head>
-<body>
-  <nav>
-    <strong>QRMatrix</strong>
-    <a href="/">Главная</a>
-    <a href="/codes">Список кодов</a>
-    <a href="/codes/new">Создать QR-код</a>
-    <a href="/access-denied">Проверка отказа</a>
+<body class="bg-light text-dark">
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark mb-4">
+    <div class="container">
+      <a class="navbar-brand fw-bold" href="/">QRMatrix <span class="badge text-bg-primary ms-1">v0.0.4</span></a>
+      <div class="navbar-nav gap-2">
+        <a class="nav-link" href="/">Главная</a>
+        <a class="nav-link active" href="/codes">Список кодов</a>
+        <a class="nav-link" href="/codes/new">Создать QR-код</a>
+        <a class="nav-link" href="/access-denied">Проверка отказа</a>
+      </div>
+    </div>
   </nav>
 
-  <h1>QRMatrix — Реестр QR-кодов</h1>
-  <table>
-    <thead>
-      <tr>
-        <th>ID</th>
-        <th>Превью</th>
-        <th>Название</th>
-        <th>Содержимое</th>
-        <th>Действие</th>
-      </tr>
-    </thead>
-    <tbody>
-      {{#each items}}
-      <tr>
-        <td>{{this.id}}</td>
-        <td><img src="{{this.dataUrl}}" alt="QR" width="56" height="56" /></td>
-        <td>
-          {{this.title}}
-          {{#if this.isPrivate}}<span class="badge-private">Закрытый</span>{{/if}}
-        </td>
-        <td><code>{{this.content}}</code></td>
-        <td><a href="/codes/{{this.id}}">Открыть карточку</a></td>
-      </tr>
-      {{/each}}
-    </tbody>
-  </table>
+  <main class="container pb-5">
+    <div class="d-flex flex-wrap justify-content-between align-items-center gap-2 mb-3">
+      <h1 class="h3 mb-0">Реестр QR-кодов</h1>
+      <a class="btn btn-primary" href="/codes/new">+ Создать QR-код</a>
+    </div>
+
+    {{#if items.length}}
+      <div class="card shadow-sm">
+        <div class="table-responsive">
+          <table class="table table-hover align-middle mb-0">
+            <thead class="table-light">
+              <tr>
+                <th style="width: 70px;">ID</th>
+                <th style="width: 84px;">Превью</th>
+                <th>Название</th>
+                <th>Содержимое</th>
+                <th>Создан</th>
+                <th class="text-end">Действие</th>
+              </tr>
+            </thead>
+            <tbody>
+              {{#each items}}
+              <tr>
+                <td><strong>#{{this.id}}</strong></td>
+                <td>
+                  <img src="{{this.dataUrl}}" alt="QR {{this.title}}" width="56" height="56" class="border rounded bg-white p-1" />
+                </td>
+                <td>
+                  <span class="fw-semibold">{{this.title}}</span>
+                  {{#if this.isPrivate}}
+                    <span class="badge text-bg-danger ms-1">Закрытый</span>
+                  {{/if}}
+                </td>
+                <td><code class="small">{{this.content}}</code></td>
+                <td class="text-muted small">{{this.createdAt}}</td>
+                <td class="text-end">
+                  <a class="btn btn-sm btn-outline-primary" href="/codes/{{this.id}}">Открыть карточку</a>
+                </td>
+              </tr>
+              {{/each}}
+            </tbody>
+          </table>
+        </div>
+      </div>
+    {{else}}
+      <div class="card border-0 shadow-sm text-center py-5 px-4 bg-white">
+        <div class="card-body">
+          <span class="badge text-bg-secondary mb-2">База пуста</span>
+          <h2 class="h5 card-title">Сохранённых QR-кодов пока нет</h2>
+          <p class="card-text text-muted mx-auto mb-4" style="max-width: 480px;">
+            Список пуст до создания первой записи. Создайте первый QR-код через форму — запись сохранится в PostgreSQL.
+          </p>
+          <div class="d-flex justify-content-center gap-2">
+            <a class="btn btn-primary" href="/codes/new">Создать первый QR-код</a>
+            <a class="btn btn-outline-secondary" href="/">На главную</a>
+          </div>
+        </div>
+      </div>
+    {{/if}}
+  </main>
+
+  <script src="/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

@@ -2,43 +2,62 @@
 <html lang="ru">
 <head>
   <meta charset="UTF-8" />
-  <title>QRMatrix — Создать QR-код</title>
-  <style>
-    body { font-family: system-ui, sans-serif; max-width: 860px; margin: 32px auto; padding: 0 16px; color: #1f2937; }
-    nav { display: flex; gap: 16px; padding: 12px 16px; background: #f3f4f6; border-radius: 8px; margin-bottom: 24px; }
-    nav a { text-decoration: none; color: #1d4ed8; font-weight: 600; }
-    .field { margin-bottom: 14px; }
-    label { display: block; font-weight: 600; margin-bottom: 4px; }
-    input[type="text"] { width: 100%; max-width: 480px; padding: 8px; border: 1px solid #d1d5db; border-radius: 6px; }
-    button { padding: 10px 18px; background: #1d4ed8; color: #fff; border: none; border-radius: 6px; cursor: pointer; font-weight: 600; }
-  </style>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>QRMatrix — Создать QR-код (v0.0.4)</title>
+  <link rel="stylesheet" href="/vendor/bootstrap/css/bootstrap.min.css" />
 </head>
-<body>
-  <nav>
-    <strong>QRMatrix</strong>
-    <a href="/">Главная</a>
-    <a href="/codes">Список кодов</a>
-    <a href="/codes/new">Создать QR-код</a>
-    <a href="/access-denied">Проверка отказа</a>
+<body class="bg-light text-dark">
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark mb-4">
+    <div class="container">
+      <a class="navbar-brand fw-bold" href="/">QRMatrix <span class="badge text-bg-primary ms-1">v0.0.4</span></a>
+      <div class="navbar-nav gap-2">
+        <a class="nav-link" href="/">Главная</a>
+        <a class="nav-link" href="/codes">Список кодов</a>
+        <a class="nav-link active" href="/codes/new">Создать QR-код</a>
+        <a class="nav-link" href="/access-denied">Проверка отказа</a>
+      </div>
+    </div>
   </nav>
 
-  <h1>QRMatrix — Генерация нового QR-кода</h1>
-  <p>Чтобы проверить ошибочный сценарий, отправьте форму с пустыми полями.</p>
+  <main class="container pb-5">
+    <div class="row justify-content-center">
+      <div class="col-lg-7">
+        <div class="card shadow-sm">
+          <div class="card-body p-4">
+            <h1 class="h3 mb-2">Генерация нового QR-кода</h1>
+            <p class="text-muted small mb-4">
+              Заполните название и текст/ссылку. Для проверки сценария отказа отправьте форму с пустыми полями.
+            </p>
 
-  <form method="POST" action="/codes">
-    <div class="field">
-      <label for="title">Название QR-кода</label>
-      <input id="title" name="title" type="text" placeholder="Например: Ссылка на презентацию" />
+            <form method="POST" action="/codes">
+              <div class="mb-3">
+                <label for="title" class="form-label fw-semibold">Название QR-кода</label>
+                <input id="title" name="title" type="text" class="form-control" placeholder="Например: Ссылка на презентацию" />
+              </div>
+
+              <div class="mb-3">
+                <label for="content" class="form-label fw-semibold">Текст или URL для кодирования</label>
+                <input id="content" name="content" type="text" class="form-control" placeholder="https://example.com" />
+                <div class="form-text">Максимум 300 символов.</div>
+              </div>
+
+              <div class="mb-4">
+                <label for="color" class="form-label fw-semibold d-block">Цвет модулей QR-кода</label>
+                <input id="color" name="color" type="color" class="form-control form-control-color" value="#111827" title="Выберите цвет QR-кода" />
+              </div>
+
+              <div class="d-flex flex-wrap gap-2">
+                <button type="submit" class="btn btn-primary">Сгенерировать и сохранить</button>
+                <a href="/codes" class="btn btn-outline-secondary">К списку</a>
+                <a href="/" class="btn btn-link text-decoration-none">На главную</a>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
     </div>
-    <div class="field">
-      <label for="content">Текст или URL для кодирования</label>
-      <input id="content" name="content" type="text" placeholder="https://example.com" />
-    </div>
-    <div class="field">
-      <label for="color">Цвет модулей QR-кода</label>
-      <input id="color" name="color" type="color" value="#111827" />
-    </div>
-    <button type="submit">Сгенерировать и сохранить</button>
-  </form>
+  </main>
+
+  <script src="/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

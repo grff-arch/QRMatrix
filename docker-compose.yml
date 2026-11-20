@@ -16,7 +16,7 @@ services:
       retries: 10
 
   app:
-    image: grffarch/qrmatrix:0.0.3
+    image: grffarch/qrmatrix:0.0.4
     ports:
       - "8080:8080"
     environment:

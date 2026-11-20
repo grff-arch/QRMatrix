@@ -10,7 +10,7 @@ export class CodesController {
   @Render('index')
   async getHome() {
     const items = await this.codesService.readAll();
-    return { count: items.length, version: '0.0.3' };
+    return { count: items.length, version: '0.0.4' };
   }
 
   @Get('codes')
